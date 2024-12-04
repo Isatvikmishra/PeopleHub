@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
+import { getLocalStorage } from '../../utils/localStorage'
+import { AuthContext } from '../../context/AuthProvider'
 
-const Login = () => {
+const Login = ({handleLogin}) => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     const submitHandler = (e) => {
             e.preventDefault();
-            console.log("Hello")
+            handleLogin(email, password)
             setEmail('')
             setPassword('')
     }
+
 
   return (
     
