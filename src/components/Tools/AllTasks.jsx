@@ -1,35 +1,35 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { AuthContext } from '../../context/AuthProvider'
 
 const Alltasks = () => {
-  return (
-    <div id='taskList' className='p-4 bg-[#1C1C1C] mt-7 h-48 overflow-auto rounded '>
-        <div className='bg-red-400  mb-2 py-2 px-4 flex justify-between rounded '>
-            <h3>Satvik</h3>
-            <h3>Make UI DESIGN</h3>
-            <h5>Status</h5>
-        </div>
-        <div className='bg-green-400 mb-2 py-2 px-4 flex justify-between rounded '>
-            <h3>Satvik</h3>
-            <h3>Make UI DESIGN</h3>
-            <h5>Status</h5>
-        </div>
-        <div className='bg-blue-400 mb-2 py-2 px-4 flex justify-between rounded '>
-            <h3>Satvik</h3>
-            <h3>Make UI DESIGN</h3>
-            <h5>Status</h5>
-        </div>
-        <div className='bg-yellow-400 mb-2 py-2 px-4 flex justify-between rounded '>
-            <h3>Satvik</h3>
-            <h3>Make UI DESIGN</h3>
-            <h5>Status</h5>
-        </div>
-        <div className='bg-purple-400 mb-2 py-2 px-4 flex justify-between rounded '>
-            <h3>Satvik</h3>
-            <h3>Make UI DESIGN</h3>
-            <h5>Status</h5>
-        </div>
 
+    const authData = useContext(AuthContext)
+    console.log(authData.employees);
+    
+
+  return (
+    <div id='taskList' className='p-4 bg-[#1C1C1C] mt-5'>
+        <div className='bg-red-400  mb-2 py-2 px-4 flex  justify-between rounded '>
+                <h3 className='text-lg font-semibold w-1/5'>Name</h3>
+                <h3 className='text-lg font-semibold w-1/5'>New Task</h3>
+                <h3 className='text-lg font-semibold w-1/5'>Active Task</h3>
+                <h3 className='text-lg font-semibold w-1/5'>Completed</h3>
+                <h3 className='text-lg font-semibold w-1/5'>Failed</h3>
+
+        </div>
+        <div className='mt-2'>
+            {authData.employees.map((elem)=>{
+                return  <div  className='border-2 border-emerald-500 mb-2 py-2 px-4 flex justify-between rounded'>
+                    <h3 className='text-lg font-medium  w-1/5'>{elem.firstName}</h3>
+                    <h3 className='text-lg font-medium text-blue-400  w-1/5'>{elem.taskCounts.newTask}</h3>
+                    <h3 className='text-lg font-medium text-yellow-400  w-1/5'>{elem.taskCounts.active}</h3>
+                    <h3 className='text-lg font-medium text-green-400  w-1/5'>{elem.taskCounts.completed}</h3>
+                    <h3 className='text-lg font-medium text-red-400  w-1/5'>{elem.taskCounts.failed}</h3>
+
+            </div> })}
+        </div>    
     </div>
+   
   )
 }
 
