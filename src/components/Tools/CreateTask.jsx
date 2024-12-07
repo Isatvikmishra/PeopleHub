@@ -1,31 +1,38 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { AuthContext } from '../../context/AuthProvider'
 
 const CreateTask = () => {
+
+    const [userData, setUserData] = useContext(AuthContext)
 
     const [taskTitle, setTaskTitle] = useState('')
     const [taskDescription, setTaskDescription] = useState('')
     const [taskDate, setTaskDate] = useState('')
-    const [taskCategory, setTaskCategory] = useState('')
-    const [taskAssigned, setTaskAssigned] = useState('')
+    const [category, setCategory] = useState('')
+    const [asignTo, setAsignTo] = useState('')
 
     const [newTask, setNewTask] = useState('')
 
     const submitHandler = (e)=>{
         e.preventDefault()
-        setNewTask({taskTitle, taskDescription,taskDate,taskCategory,active:false, completed:false, newTask:true, failed:false})
+        const newTask = {taskTitle, taskDescription,taskDate,category,active:false, completed:false, newTask:true, failed:false}
 
 
-        const data = JSON.parse(localStorage.getItem('employees'))  
+        const data = userData  
+        
         data.forEach((elem)=>{
-           if(taskAssigned == elem.firstName){
+           if(asignTo == elem.firstName){
             elem.tasks.push(newTask)
-            console.log(elem)
+            elem.taskCounts.newTask =  elem.taskCounts.newTask+1
            }
         })
+        setUserData(data)
+        console.log(data);
 
+        
         setTaskTitle('')
-        setTaskAssigned('')
-        setTaskCategory('')
+        setAsignTo('')
+        setCategory('')
         setTaskDate('')
         setTaskDescription('')
     }
@@ -60,18 +67,18 @@ const CreateTask = () => {
                 <div>
                     <h3 className='text-md px-1 text-gray-300 mb-0.5'>Assign To</h3>
                     <input 
-                    value={taskAssigned}
+                    value={asignTo}
                     onChange={(e)=>{
-                        setTaskAssigned(e.target.value)
+                        setAsignTo(e.target.value)
                     }}
                     className='w-4/5 bg-transparent border-[1px] border-gray-400 mb-4 font-medium  placeholder:text-gray-400 rounded-lg px-4 py-1 outline-none'  type="text" placeholder='Employee Name ' />
                 </div>
                 <div>
                     <h3 className='text-md px-1 text-gray-300 mb-0.5'>Category</h3>
                     <input
-                    value={taskCategory}
+                    value={category}
                     onChange={(e)=>{
-                        setTaskCategory(e.target.value)
+                        setCategory(e.target.value)
                     }}
                     className='w-4/5 bg-transparent border-[1px] border-gray-400 mb-4 font-medium  placeholder:text-gray-400 rounded-lg px-4 py-1 outline-none'  type="text" placeholder='design, dev..' />
                 </div>
