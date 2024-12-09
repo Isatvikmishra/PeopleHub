@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { AuthContext } from '../../context/AuthProvider'
 
-const Alltasks = () => {
+const AllTasks = () => {
 
     const [userData, setUserData] = useContext(AuthContext)
     
@@ -32,4 +32,4 @@ const Alltasks = () => {
   )
 }
 
-export default Alltasks
+export default AllTasks
