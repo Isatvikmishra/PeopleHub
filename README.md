@@ -2,6 +2,13 @@
 
 A web application designed to streamline employee data management, task assignment, and performance tracking. The app prioritizes user-friendliness and security, ensuring efficient handling of organizational needs.
 
+### For Test
+- Email for admin: admin@me.com |
+Pass: 123
+
+- For Employee
+ e@e.com |
+ Pass: 123
 
 ## Features
 
